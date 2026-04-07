@@ -1,0 +1,39 @@
+from fastapi import FastAPI, UploadFile, File
+from PIL import Image
+import torch
+import io
+import os
+
+from src.model.cnn import MnistCNN
+from src.utils.preprocess import preprocess_image
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+app = FastAPI()
+
+model = MnistCNN()
+model.load_state_dict(torch.load(
+    os.path.join(BASE_DIR, "models", "mnist_cnn.pt"),
+    map_location=torch.device('cpu')
+))
+model.eval()
+
+@app.post("/predict")
+async def predict(file: UploadFile = File(...)):
+    # Lire l'image téléchargée
+    image_data = await file.read()
+    image = Image.open(io.BytesIO(image_data))
+    
+    # Prétraiter l'image
+    image_tensor = preprocess_image(image)
+    
+    # Faire la prédiction
+    with torch.no_grad():
+        output = model(image_tensor)
+        predicted_class = torch.argmax(output, dim=1).item()
+    
+    return {
+        "predicted_class": predicted_class
+        }
+
