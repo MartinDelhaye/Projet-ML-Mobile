@@ -3,6 +3,7 @@ from PIL import Image
 import torch
 import io
 import os
+import torch.nn.functional as F
 
 from src.model.cnn import MnistCNN
 from src.utils.preprocess import preprocess_image
@@ -23,7 +24,12 @@ model.eval()
 async def predict(file: UploadFile = File(...)):
     # Lire l'image téléchargée
     image_data = await file.read()
-    image = Image.open(io.BytesIO(image_data))
+    try:
+        image = Image.open(io.BytesIO(image_data))
+    except Exception:
+        return {
+            "error": "Invalid image file"
+            }
     
     # Prétraiter l'image
     image_tensor = preprocess_image(image)
@@ -32,8 +38,12 @@ async def predict(file: UploadFile = File(...)):
     with torch.no_grad():
         output = model(image_tensor)
         predicted_class = torch.argmax(output, dim=1).item()
+        
+    probs = F.softmax(output, dim=1)
+    confidence = probs[0][predicted_class].item()
     
     return {
-        "predicted_class": predicted_class
+        "predicted_class": predicted_class,
+        "confidence": confidence
         }
 
