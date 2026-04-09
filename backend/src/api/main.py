@@ -10,7 +10,6 @@ from src.utils.preprocess import preprocess_image
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-
 app = FastAPI()
 
 model = MnistCNN()
@@ -22,9 +21,8 @@ model.eval()
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
-    # Lire l'image téléchargée
-    image_data = await file.read()
     try:
+        image_data = await file.read()
         image = Image.open(io.BytesIO(image_data))
     except Exception:
         return {
