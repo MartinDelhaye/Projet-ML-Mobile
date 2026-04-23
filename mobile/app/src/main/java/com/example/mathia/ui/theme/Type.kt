@@ -24,11 +24,18 @@ val Typography = Typography(
     titleLarge = TextStyle(
         fontFamily = TilteFont,
         fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
+        fontSize = 28.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
     titleMedium = TextStyle(
+        fontFamily = TilteFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
+    ),
+    titleSmall = TextStyle(
         fontFamily = TilteFont,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
