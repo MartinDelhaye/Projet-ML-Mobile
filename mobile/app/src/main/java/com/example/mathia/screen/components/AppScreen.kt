@@ -19,6 +19,7 @@ import com.example.mathia.navigation.Screen
 fun AppScreen(
     navController: NavHostController,
     showHomeButton: Boolean = true,
+    onInfoClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
     Column(
@@ -32,12 +33,23 @@ fun AppScreen(
                 Modifier
                     .padding(16.dp)
         ) {
+            onInfoClick?.let {
+                IconButton(
+                    onClick = it
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_info),
+                        contentDescription = "Info",
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
+            }
             if (showHomeButton){
                 IconButton(
                     onClick = { navController.navigate(Screen.HomeScreen.route) }
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.home_icon),
+                        painter = painterResource(id = R.drawable.icon_home),
                         contentDescription = "Accueil",
                         modifier = Modifier.size(32.dp)
                     )
