@@ -25,7 +25,7 @@ fun HomeScreen(navController: NavHostController) {
     AppScreen(
         navController = navController,
         showHomeButton = false,
-        onInfoClick = { showDialog = false }
+        onInfoClick = { showDialog = true }
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
