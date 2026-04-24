@@ -19,6 +19,10 @@ model.load_state_dict(torch.load(
 ))
 model.eval()
 
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     try:
