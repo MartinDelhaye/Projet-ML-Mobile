@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.mathia.navigation.Screen
 import com.example.mathia.screen.components.AppScreen
 import com.example.mathia.screen.components.InfoDialog
 import com.example.mathia.screen.components.OperationButton
@@ -57,25 +58,25 @@ fun HomeScreen(navController: NavHostController) {
                     symbol = "+",
                     label = "Addition",
                     color = AdditionColor,
-                    onClick = { }
+                    onClick = { navController.navigate(Screen.GameScreen.createRoute("ADDITION")) }
                 )
                 OperationButton(
                     symbol = "-",
                     label = "Soustraction",
                     color = SubtractionColor,
-                    onClick = { }
+                    onClick = { navController.navigate(Screen.GameScreen.createRoute("SUBTRACTION")) }
                 )
                 OperationButton(
                     symbol = "×",
                     label = "Multiplication",
                     color = MultiplyColor,
-                    onClick = { }
+                    onClick = { navController.navigate(Screen.GameScreen.createRoute("MULTIPLICATION")) }
                 )
                 OperationButton(
                     symbol = "÷",
                     label = "Division",
                     color = DivisionColor,
-                    onClick = { }
+                    onClick = { navController.navigate(Screen.GameScreen.createRoute("DIVISION")) }
                 )
             }
         }
