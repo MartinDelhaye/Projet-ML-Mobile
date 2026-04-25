@@ -40,10 +40,18 @@ class GameViewModel : ViewModel() {
     val isGameFinished: StateFlow<Boolean> = _isGameFinished
 
     fun startGame(operation: Operation) {
-        _game.value = GameGenerator.generateGame(operation)
+        _isGameFinished.value = false  // reset AVANT de générer
+        _game.value = null             // force le reset de l'UI
         _currentQuestionIndex.value = 0
         _detectedDigit.value = null
+        _game.value = GameGenerator.generateGame(operation)
+    }
+
+    fun resetGame() {
+        _game.value = null
         _isGameFinished.value = false
+        _currentQuestionIndex.value = 0
+        _detectedDigit.value = null
     }
 
     fun setDetectedDigit(digit: String) {
