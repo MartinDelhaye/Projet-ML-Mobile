@@ -15,9 +15,7 @@ import androidx.navigation.NavHostController
 import com.example.mathia.R
 import com.example.mathia.navigation.Screen
 import com.example.mathia.screen.components.AppScreen
-import com.example.mathia.screen.game.GameViewModel
-import com.example.mathia.ui.theme.Error
-import com.example.mathia.ui.theme.Success
+import com.example.mathia.screen.components.CardQuestionResultScreen
 
 @Composable
 fun ResultScreen(
@@ -80,32 +78,7 @@ fun ResultScreen(
             }
 
             items(questions) { question ->
-                Card(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(text = question.questionText)
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = "Ta réponse : ${question.userProposition ?: "?"}")
-                            if (!question.isCorrect) {
-                                Text(
-                                    text = "Réponse : ${question.correctAnswer}",
-                                    color = Error
-                                )
-                            }
-                        }
-                        Text(
-                            text = if (question.isCorrect) "✅" else "❌",
-                            style = MaterialTheme.typography.titleMedium
-                        )
-                    }
-                }
+                CardQuestionResultScreen(question = question)
             }
 
             item {
