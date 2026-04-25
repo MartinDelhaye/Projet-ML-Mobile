@@ -30,12 +30,6 @@ class GameViewModel : ViewModel() {
     private val _detectedDigit = MutableStateFlow<String?>(null)
     val detectedDigit: StateFlow<String?> = _detectedDigit
 
-    val questionProgress: StateFlow<String> = combine(
-        _currentQuestionIndex
-    ) { index ->
-        "${index[0] + 1}/5"
-    }.stateIn(viewModelScope, SharingStarted.Lazily, "1/5")
-
     private val _isGameFinished = MutableStateFlow(false)
     val isGameFinished: StateFlow<Boolean> = _isGameFinished
 
