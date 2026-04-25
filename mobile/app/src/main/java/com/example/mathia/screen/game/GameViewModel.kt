@@ -9,10 +9,7 @@ import com.example.mathia.model.GameGenerator
 import com.example.mathia.model.Operation
 import com.example.mathia.network.RetrofitInstance
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
