@@ -1,5 +1,5 @@
 from torchvision import transforms
-from PIL import Image, ImageOps
+from PIL import Image
 
 from src.utils.segmentation import segment_image
 

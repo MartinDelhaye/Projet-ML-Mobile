@@ -9,7 +9,7 @@ def segment_image(image):
     gray = cv2.cvtColor(image_np, cv2.COLOR_RGB2GRAY)
     
     # Binarisation
-    ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU)
     
     # Détection des contours
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
